@@ -59,54 +59,19 @@ Varying the number of neurons per layer
 Adjusting training epochs
 
 ### Results
-Dawta Preprocessing
-Target Variable: IS_SUCCESSFUL
 
-Features: APPLICATION_TYPE, AFFILIATION, CLASSIFICATION, USE_CASE, ORGANIZATION, STATUS, INCOME_AMT, SPECIAL_CONSIDERATIONS, ASK_AMT
+### Dependencies
+* Python
 
-Removed Columns: EIN, NAME (identification only)
+* TensorFlow
 
-Model Performance
-Initial Model Accuracy: [X]%
+* pandas
 
-Optimized Model Accuracy: [Y]%
+* scikit-learn
 
-Optimization Techniques Applied:
+* Jupyter Notebook
 
-Technique 1 (e.g., added hidden layer)
-
-Technique 2 (e.g., adjusted binning)
-
-Technique 3 (e.g., changed activation functions)
-
-Usage
-To use the trained model:
-
-Load the HDF5 file using tensorflow.keras.models.load_model()
-
-Preprocess new data using the same steps as in the notebooks
-
-Make predictions using model.predict()
-
-Dependencies
-Python 3.7+
-
-TensorFlow 2.0+
-
-pandas
-
-scikit-learn
-
-Jupyter Notebook
-
-Recommendations
-While the neural network achieved [X]% accuracy, alternative approaches like Random Forest or Gradient Boosting might provide better interpretability with comparable performance. Future work could explore:
-
-Feature engineering to create more predictive features
-
-Hyperparameter tuning with Keras Tuner
-
-Ensemble methods combining multiple models
+### Recommendations
 
 License
 This project is licensed under the MIT License.
