@@ -94,7 +94,7 @@ For this binary classification task:
 
 ## 💻 Technologies Used
 
-- Python 3.11
+- Python
 - TensorFlow / Keras
 - Scikit-learn
 - XGBoost
@@ -103,9 +103,34 @@ For this binary classification task:
 
 ---
 
-## 🚀 How to Run the Project
+## 💻 Technical References
 
-1. Clone the repo:
-   ```bash
-   git clone https://github.com/your-username/alphabet-soup-analysis.git
-   cd alphabet-soup-analysis
+* TensorFlow Documentation (2023). Keras API reference.
+https://www.tensorflow.org/api_docs/python/tf/keras
+
+* Scikit-learn Developers (2023). Scikit-learn documentation.
+https://scikit-learn.org/stable/documentation.html
+
+* Pandas Development Team (2023). Pandas documentation.
+https://pandas.pydata.org/docs/
+
+* Google Colab (2023). Official documentation.
+https://colab.research.google.com/
+
+* Google AI (2023). Gemini API documentation.
+https://ai.google.dev/
+
+* NumPy Documentation (2023). NumPy user guide.
+https://numpy.org/doc/
+
+* Python Documentation (2023). Official Python docs.
+https://docs.python.org/3/
+
+* GitHub Documentation (2023). Version control platform.
+https://docs.github.com/
+
+* Jupyter Documentation (2023). Notebook environment docs.
+https://docs.jupyter.org/
+
+
+
