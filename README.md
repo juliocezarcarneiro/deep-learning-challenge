@@ -1,83 +1,111 @@
-# Neural Network Model Report: Alphabet Soup Analysis
+# 🤖 Alphabet Soup: Neural Network vs. XGBoost for Donation Success Prediction
 
-# Overview of the Analysis
-The goal of this analysis is to develop and evaluate a deep learning model to predict the success of charitable applications submitted to Alphabet Soup. Using historical data, the task is framed as a binary classification problem where the model predicts whether an application will be successful (IS_SUCCESSFUL = 1) or not (IS_SUCCESSFUL = 0). The model’s performance is compared against a benchmark accuracy target of 75%.
+## 📌 Project Overview
 
-# Results 
+The goal of this project is to build a deep learning model to predict whether charitable donation applications submitted to Alphabet Soup will be successful. Using historical application data, we frame this as a **binary classification** problem (`IS_SUCCESSFUL = 1` or `0`) and benchmark our model against a **75% accuracy target**.
 
-## Data Preprocessing
-* Target Variable:
+Additionally, we compare the neural network's performance to a tuned **XGBoost model**, to determine which approach is more effective for this problem.
 
-    * IS_SUCCESSFUL
+---
 
-* Feature Variables:
+## 🧠 Neural Network Model Report
 
-    * All other columns in the preprocessed dataset after converting categorical features with pd.get_dummies, except those removed for being identifiers or not useful for prediction.
+### 🔄 Data Preprocessing
 
-* Variables Removed:
+- **Target Variable**:  
+  - `IS_SUCCESSFUL`
 
-    * Columns such as EIN and NAME were removed since they are identifiers and provide no predictive power.
+- **Feature Variables**:  
+  - All other columns in the cleaned dataset after encoding categorical features with `pd.get_dummies`.
 
-    * Rare categories in CLASSIFICATION and APPLICATION_TYPE were grouped into "Other" to reduce noise and dimensionality.
+- **Removed Variables**:
+  - `EIN`, `NAME` — dropped as identifiers with no predictive value.
+  - Rare values in `CLASSIFICATION` and `APPLICATION_TYPE` were grouped under `"Other"` to reduce dimensionality and noise.
 
-## Compiling, Training, and Evaluating the Neural Network Model
-* Model Architecture:
+---
 
-    * Input Layer: Based on the number of features after scaling.
+### 🛠️ Model Architecture & Training
 
-    * First Hidden Layer: 128 neurons, ReLU activation
+- **Input Layer**:
+  - Based on the number of features after scaling.
 
-    * Second Hidden Layer: 64 neurons, ReLU activation
+- **Hidden Layers**:
+  - Layer 1: 128 neurons, ReLU
+  - Layer 2: 64 neurons, ReLU
 
-    * Output Layer: 1 neuron, Sigmoid activation (binary classification)
+- **Output Layer**:
+  - 1 neuron, Sigmoid activation (for binary classification)
 
-* Compilation Settings:
+- **Compilation**:
+  - Loss Function: `binary_crossentropy`
+  - Optimizer: `adam`
+  - Metric: `accuracy`
 
-    * Loss Function: Binary Crossentropy
+- **Preprocessing**:
+  - Numeric features scaled with `StandardScaler`
+  - Categorical features encoded with `pd.get_dummies`
 
-    * Optimizer: Adam
+---
 
-    * Metrics: Accuracy
+### 📉 Neural Network Performance
 
-* Training Results:
+- **Accuracy**: `73.05%`
+- **Loss**: `0.5713`
 
-    * Final Accuracy: 0.7305
+#### ⚙️ Optimization Steps
 
-    * Loss: 0.5713
+- Experimented with different:
+  - Hidden layer sizes and neuron counts
+  - Epochs and batch sizes
+  - Feature groupings for rare classes
+- Scaled inputs for better training stability
 
-📉 Model Performance (Neural Network):
+⛔ **Conclusion**: Despite tuning, the neural network fell short of the 75% accuracy benchmark.
 
-* The model achieved 73.05% accuracy, which did not meet the 75% target.
+---
 
-* The loss function indicates moderate error, suggesting some room for optimization.
+## 🔁 XGBoost Benchmark (with Optuna Tuning)
 
-* Steps Taken to Improve Performance:
+- **Optimization**:
+  - Used `Optuna` with 50 trials to fine-tune:
+    - `n_estimators`, `learning_rate`, `max_depth`, `subsample`, `colsample_bytree`, `reg_alpha`, `reg_lambda`
 
-    * Tried different numbers of neurons in the hidden layers.
+- **Final Evaluation**:
+  - Accuracy: `75.02%`
+  - ROC AUC: `0.8155`
 
-    * Normalized input features using StandardScaler.
+- **Classification Report**:
+  - Precision, recall, and F1-scores exceeded those of the neural network.
 
-    * Used categorical grouping and encoding to simplify features.
+---
 
-    * Increased epochs and adjusted batch size for better training convergence.
+## 🧾 Summary & Recommendation
 
-📊 XGBoost Benchmark Comparison
-* Optimized with Optuna Hyperparameter Tuning:
+The neural network performed reasonably well, achieving **73.05% accuracy**, but did not meet the benchmark. The **XGBoost model**, optimized with Optuna, reached **75.02% accuracy** and demonstrated better performance overall.
 
-    * Parameters such as n_estimators, learning_rate, max_depth, subsample, and colsample_bytree were fine-tuned over 50 trials.
+### ✅ Recommendation:
+For this binary classification task:
+- Use **XGBoost** due to:
+  - Higher accuracy
+  - Better handling of categorical and imbalanced features
+  - Easier interpretability and feature importance extraction
 
-* Final Evaluation (on full dataset):
+---
 
-    * Accuracy: 0.7502
+## 💻 Technologies Used
 
-    * ROC AUC: 0.8155
+- Python 3.11
+- TensorFlow / Keras
+- Scikit-learn
+- XGBoost
+- Optuna (for hyperparameter tuning)
+- Pandas, NumPy, Matplotlib
 
-# Summary
-The deep learning model achieved a final accuracy of 73.05%, falling slightly short of the 75% performance benchmark. Despite standard preprocessing, feature engineering, and tuning hidden layers, the neural network did not outperform the XGBoost model, which reached 75.02% accuracy and a strong ROC AUC of 0.8155.
+---
 
-## Recommendation:
-For this binary classification task, XGBoost is a better choice due to its:
+## 🚀 How to Run the Project
 
-* Higher predictive accuracy
-
-* Better handling of feature importance
+1. Clone the repo:
+   ```bash
+   git clone https://github.com/your-username/alphabet-soup-analysis.git
+   cd alphabet-soup-analysis
