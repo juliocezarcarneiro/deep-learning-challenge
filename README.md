@@ -1,80 +1,83 @@
-# Alphabet Soup Charity Funding Predictor
+# Neural Network Model Report: Alphabet Soup Analysis
 
-### Overview
-This project aims to help Alphabet Soup, a nonprofit foundation, identify which funding applicants have the highest likelihood of success. Using machine learning and neural networks, we've developed a binary classifier that predicts whether an organization will use funding effectively based on various metadata features.
+# Overview of the Analysis
+The goal of this analysis is to develop and evaluate a deep learning model to predict the success of charitable applications submitted to Alphabet Soup. Using historical data, the task is framed as a binary classification problem where the model predicts whether an application will be successful (IS_SUCCESSFUL = 1) or not (IS_SUCCESSFUL = 0). The model’s performance is compared against a benchmark accuracy target of 75%.
 
-### Dataset Information
-The dataset contains metadata for over 34,000 organizations that have received funding from Alphabet Soup, including:
+# Results 
 
-* Identification columns: EIN, NAME
+## Data Preprocessing
+* Target Variable:
 
-* Application details: APPLICATION_TYPE, AFFILIATION, CLASSIFICATION, USE_CASE
+    * IS_SUCCESSFUL
 
-* Organization info: ORGANIZATION, STATUS, INCOME_AMT, SPECIAL_CONSIDERATIONS
+* Feature Variables:
 
-* Funding details: ASK_AMT (funding amount requested)
+    * All other columns in the preprocessed dataset after converting categorical features with pd.get_dummies, except those removed for being identifiers or not useful for prediction.
 
-* Target variable: IS_SUCCESSFUL (whether money was used effectively)
+* Variables Removed:
 
-### Implementation Steps
-1. Data Preprocessing
-    * Target variable: IS_SUCCESSFUL (binary classification)
+    * Columns such as EIN and NAME were removed since they are identifiers and provide no predictive power.
 
-    * Features: All relevant columns except EIN and NAME
+    * Rare categories in CLASSIFICATION and APPLICATION_TYPE were grouped into "Other" to reduce noise and dimensionality.
 
-    * Preprocessing steps:
+## Compiling, Training, and Evaluating the Neural Network Model
+* Model Architecture:
 
-        * Dropped non-beneficial columns (EIN, NAME)
+    * Input Layer: Based on the number of features after scaling.
 
-        * Binned rare categorical values
+    * First Hidden Layer: 128 neurons, ReLU activation
 
-        * Encoded categorical variables using one-hot encoding
+    * Second Hidden Layer: 64 neurons, ReLU activation
 
-        * Scaled features using StandardScaler
+    * Output Layer: 1 neuron, Sigmoid activation (binary classification)
 
-        * Split data into training and testing sets
+* Compilation Settings:
 
-2. Neural Network Model
-Initial Model Architecture:
+    * Loss Function: Binary Crossentropy
 
-Input layer matching number of features
+    * Optimizer: Adam
 
-Two hidden layers with ReLU activation
+    * Metrics: Accuracy
 
-Output layer with sigmoid activation
+* Training Results:
 
-Compiled with binary_crossentropy loss and adam optimizer
+    * Final Accuracy: 0.7305
 
-3. Model Optimization
-Attempted various optimization techniques including:
+    * Loss: 0.5713
 
-Adjusting binning thresholds for categorical variables
+📉 Model Performance (Neural Network):
 
-Adding/removing hidden layers
+* The model achieved 73.05% accuracy, which did not meet the 75% target.
 
-Experimenting with different activation functions
+* The loss function indicates moderate error, suggesting some room for optimization.
 
-Varying the number of neurons per layer
+* Steps Taken to Improve Performance:
 
-Adjusting training epochs
+    * Tried different numbers of neurons in the hidden layers.
 
-### Results
+    * Normalized input features using StandardScaler.
 
-### Dependencies
-* Python
+    * Used categorical grouping and encoding to simplify features.
 
-* TensorFlow
+    * Increased epochs and adjusted batch size for better training convergence.
 
-* pandas
+📊 XGBoost Benchmark Comparison
+* Optimized with Optuna Hyperparameter Tuning:
 
-* scikit-learn
+    * Parameters such as n_estimators, learning_rate, max_depth, subsample, and colsample_bytree were fine-tuned over 50 trials.
 
-* Jupyter Notebook
+* Final Evaluation (on full dataset):
 
-### Recommendations
+    * Accuracy: 0.7502
 
-License
-This project is licensed under the MIT License.
+    * ROC AUC: 0.8155
 
-Credits
-Toronto University and edX
+# Summary
+The deep learning model achieved a final accuracy of 73.05%, falling slightly short of the 75% performance benchmark. Despite standard preprocessing, feature engineering, and tuning hidden layers, the neural network did not outperform the XGBoost model, which reached 75.02% accuracy and a strong ROC AUC of 0.8155.
+
+## Recommendation:
+For this binary classification task, XGBoost is a better choice due to its:
+
+* Higher predictive accuracy
+
+* Better handling of feature importance
